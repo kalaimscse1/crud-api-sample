@@ -21,7 +21,7 @@ class StudentDetailsController(private var studentdetailsrespository:StudentDeta
     @GetMapping("/students/{regno}")
     fun getstudentByRegno(@PathVariable(value = "regno") regno:Long):ResponseEntity<StudentDetails>{
         return studentdetailsrespository.findById(regno).map { studentDetails ->
-            ResponseEntity.ok(studentDetails)
+            ResponseEntity.ok(studentDetails) 
         }.orElse(ResponseEntity.notFound().build())
 
     }
