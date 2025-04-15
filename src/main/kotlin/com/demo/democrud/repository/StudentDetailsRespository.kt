@@ -5,3 +5,6 @@ import org.springframework.data.repository.CrudRepository
 
 interface StudentDetailRespository:CrudRepository<StudentDetails,Long> {
 }
+
+interface AttendanceRespository:CrudRepository<Attendance,Long> {
+}

@@ -46,3 +46,21 @@ class StudentDetailsController(private var studentdetailsrespository:StudentDeta
         }.orElse(ResponseEntity.notFound().build())
     }
 }
+
+class AttendanceController(private var attendancerespository:AttendanceRespository){
+
+    @GetMapping("/students/attendance")
+    fun getAllStudentsattendance(): MutableIterable<Attendance> = attendancerespository.findAll()
+
+    @PostMapping("/students/attendance")
+    fun createStudentAttendance(@RequestBody attendance:Attendance):Attendance =
+        attendancerespository.save(attendance)
+    
+    @GetMapping("/students/attendance/{regno}")
+    fun getstudentAttendanceByRegno(@PathVariable(value = "regno") regno:Long):ResponseEntity<Attendance>{
+        return attendancerespository.findById(regno).map { attendance ->
+            ResponseEntity.ok(attendance) 
+        }.orElse(ResponseEntity.notFound().build())
+
+    }
+}
