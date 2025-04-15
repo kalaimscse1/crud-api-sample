@@ -47,6 +47,9 @@ class StudentDetailsController(private var studentdetailsrespository:StudentDeta
     }
 }
 
+@CrossOrigin(origins = arrayOf("http://localhost:8081"))
+@RestController
+@RequestMapping("/api")
 class AttendanceController(private var attendancerespository:AttendanceRespository){
 
     @GetMapping("/students/attendance")
@@ -63,4 +66,25 @@ class AttendanceController(private var attendancerespository:AttendanceResposito
         }.orElse(ResponseEntity.notFound().build())
 
     }
+
+    @PostMapping("/students/attendance/{regno}")
+    fun updateStudentAttendanceByRegno(@PathVariable(value="regno") regno:Long,
+           @RequestBody newAttendance: Attendance): ResponseEntity<Attendance> {
+        return attendancerespository.findById(regno).map { attendance ->
+            var updatedAttendance = attendance.copy(
+                regno = newAttendance.regno, name = newAttendance.name, address = newAttendance.address,
+                email = newAttendance.email, mobno = newAttendance.mobno
+            )
+            ResponseEntity.ok().body(attendancerespository.save(updatedAttendance))
+        }.orElse(ResponseEntity.notFound().build() )
+    }
+
+    @DeleteMapping("/students/attendance/{regno}")
+    fun deleteStudentAttendanceByRegno(@PathVariable(value="regno")regno: Long):ResponseEntity<Void>{
+        return attendancerespository.findById(regno).map{
+            attendance->attendancerespository.delete(attendance)
+            ResponseEntity<Void>(HttpStatus.OK)
+        }.orElse(ResponseEntity.notFound().build())
+    }
+
 }
