@@ -12,6 +12,11 @@ data class ExamResult(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var regno:Long=0,
     var name:String="",
-    var date:String="",
-    var present:String="",
+    var tamil:Long=0,
+    var english:Long=0,
+    var maths:Long=0,
+    var science:Long=0,
+    var social:Long=0,
+    var total:Long=0,
+    var percentage:String="",
 ){}

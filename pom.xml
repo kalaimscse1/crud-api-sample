@@ -11,6 +11,10 @@
 	<groupId>com.Demo</groupId>
 	<artifactId>demo-crud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>demo</module>
+	</modules>
 	<name>demo-crud</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
