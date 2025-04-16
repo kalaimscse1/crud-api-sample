@@ -9,5 +9,4 @@ class DemoCrudApplicationTests {
 	@Test
 	fun contextLoads() {
 	}
-
 }
