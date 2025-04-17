@@ -28,13 +28,13 @@ class AttendanceController(private var attendancerespository:AttendanceResposito
     @PostMapping("/students/attendance/{regno}")
     fun updateStudentAttendanceByRegno(@PathVariable(value = "regno") regno:Long,
            @RequestBody newAttendance: Attendance): ResponseEntity<Attendance> {
-        return attendancerespository.findById(regno).map { attendance ->
+           return attendancerespository.findById(regno).map { attendance ->
             var updatedAttendance = attendance.copy(
                 regno = newAttendance.regno, name = newAttendance.name, date = newAttendance.date,
                 present = newAttendance.present
             )
             ResponseEntity.ok().body(attendancerespository.save(updatedAttendance))
-        }.orElse(ResponseEntity.notFound().build() )
+        }.orElse(ResponseEntity.notFound().build())
     }
 
     @DeleteMapping("/students/attendance/{regno}")

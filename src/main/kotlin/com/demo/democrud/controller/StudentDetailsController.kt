@@ -28,13 +28,13 @@ class StudentDetailsController(private var studentdetailsrespository:StudentDeta
     @PutMapping("/students/{regno}")
     fun updateStudentByRegno(@PathVariable(value = "regno") regno:Long,
            @RequestBody newStudentDetails: StudentDetails): ResponseEntity<StudentDetails> {
-        return studentdetailsrespository.findById(regno).map { studentDetails ->
+           return studentdetailsrespository.findById(regno).map { studentDetails ->
             var updatedStudentDetails = studentDetails.copy(
                 regno = newStudentDetails.regno, name = newStudentDetails.name, address = newStudentDetails.address,
                 email = newStudentDetails.email, mobno = newStudentDetails.mobno
             )
             ResponseEntity.ok().body(studentdetailsrespository.save(updatedStudentDetails))
-        }.orElse(ResponseEntity.notFound().build() )
+        }.orElse(ResponseEntity.notFound().build())
     }
 
     @DeleteMapping("/students/{regno}")
